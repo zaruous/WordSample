@@ -3,6 +3,7 @@ import java.io.FileOutputStream;
 
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.apache.poi.xwpf.usermodel.XWPFParagraph;
+import org.apache.poi.xwpf.usermodel.XWPFRun;
 import org.apache.poi.xwpf.usermodel.XWPFTable;
 import org.apache.poi.xwpf.usermodel.XWPFTable.XWPFBorderType;
 import org.apache.poi.xwpf.usermodel.XWPFTableRow;
@@ -16,14 +17,22 @@ public class Main {
 
 			// 문단 생성
 			XWPFParagraph paragraph = document.createParagraph();
-			paragraph.createRun().setText("문제 솰라솰라솰라");
+			extracted(document).setText("(객관식)");
 
 			for (int i = 1; i <= 5; i++) {
-
-				XWPFParagraph seq = document.createParagraph();
-				seq.createRun().setText("\t" + i + "번. 설명 솰라솰라.");
+				extracted(document).setText(i + ".ooooooooooooooooooooooooooooooooooooooo 문제 설명");
+				extracted(document).setText("-----------------------------------------------");
+				extracted(document).setText("1.ooooooooooooooooo\t3.ooooooooooooooooo");
+				extracted(document).setText("1.ooooooooooooooooo\t3.ooooooooooooooooo");
+				extracted(document).setText("2.ooooooooooooooooo\t4.ooooooooooooooooo");
+				extracted(document).setText("5.ooooooooooooooooo");
 			}
 
+			extracted(document).setText("\n\n\n(서술형)");
+			extracted(document).setText("1.문제 설명 : ooooooooooooooooooooooooooooooooooooooooooo");
+			extracted(document).setText("ooooooooooooooooooooooooooooooooooooooooooo");
+			extracted(document).setText("서술 : ooooooooooooooooooooooooooooooooooooooooooo");
+			extracted(document).setText("ooooooooooooooooooooooooooooooooooooooooooo");
 			// 표 생성
 			XWPFTable table = document.createTable();
 
@@ -39,6 +48,10 @@ public class Main {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	private static XWPFRun extracted(XWPFDocument document) {
+		return document.createParagraph().createRun();
 	}
 
 }
